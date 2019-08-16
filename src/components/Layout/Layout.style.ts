@@ -6,7 +6,7 @@ const Wrapper = styled('div')`
   display: grid;
   grid-template-areas: 'header header header' 'nav main aside';
   grid-gap: 10px;
-  grid-template-columns: minmax(250px, 2fr) minmax(320px, 1200px);
+  grid-template-columns: minmax(150px, 0.3fr) minmax(320px, 1fr);
   grid-template-rows: 50px 91vh;
   @media (max-width: 640px) {
     grid-template-areas: 'header header header' 'nav nav nav' 'main main main';
