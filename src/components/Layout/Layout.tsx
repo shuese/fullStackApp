@@ -7,6 +7,7 @@ import Wrapper from './Layout.style';
 
 export interface LayoutProps {
   children: React.ReactNode;
+  oneBlock?: boolean;
 }
 
 class Layout extends React.Component<LayoutProps> {
@@ -18,8 +19,8 @@ class Layout extends React.Component<LayoutProps> {
     children: null
   };
   public render() {
-    const { children } = this.props;
-    return <Wrapper>{children}</Wrapper>;
+    const { children, oneBlock } = this.props;
+    return <Wrapper oneBlock={oneBlock}>{children}</Wrapper>;
   }
 }
 
