@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@emotion/core": "^10.0.15",
+    "@emotion/core": "^10.0.16",
     "@emotion/styled": "^10.0.15",
     "babel-plugin-emotion": "^10.0.15",
     "babel-plugin-transform-runtime": "^6.23.0",
