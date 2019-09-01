@@ -10,6 +10,7 @@ import {
   ErrorMessage
 } from 'formik';
 import Select from '../../components/Select';
+import ErrorComponent from '../../components/ErrorComponent';
 
 export interface FormValues {
   singleLanguage: string;
@@ -67,27 +68,27 @@ const SigIn = () => {
   const renderForm = (formikBag: FormikProps<FormValues>) => (
     <Form>
       <Field name="firstName" />
-      <ErrorMessage name="firstName" />
-      <Field name="lastName" />
-      <ErrorMessage name="lastName" />
-      <Field type="email" name="email" />
-      <ErrorMessage name="email" />
-      <Field type="password" name="password" />
-      <ErrorMessage name="password" />
-      <Field type="nickName" name="nickName" />
-      <ErrorMessage name="nickName" />
-      <Field
+      <ErrorComponent name="firstName" />
+      {/* <Field name="lastName" />
+      <ErrorMessage name="lastName" /> */}
+      {/* <Field type="email" name="email" />
+      <ErrorMessage name="email" /> */}
+      {/* <Field type="password" name="password" />
+      <ErrorMessage name="password" /> */}
+      {/* <Field type="nickName" name="nickName" />
+      <ErrorMessage name="nickName" /> */}
+      {/* <Field
         name="typeUser"
         options={options}
         component={Select}
         placeholder="Выберите тип"
-      />
-      <Switch
+      /> */}
+      {/* <Switch
         onChange={val => {
           formikBag.setFieldValue('race', val);
         }}
         checked={formikBag.values.race}
-      />
+      /> */}
 
       <button type="submit">Submit Form</button>
     </Form>
