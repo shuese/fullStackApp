@@ -9,12 +9,17 @@
     "@types/node": "12.7.2",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.8.5",
+    "@types/react-select": "^3.0.4",
+    "@types/react-tooltip": "^3.9.3",
     "core-decorators": "^0.20.0",
     "formik": "^1.5.8",
     "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
+    "react-select": "^3.0.4",
+    "react-switch": "^5.0.1",
+    "react-tooltip": "^3.10.0",
     "typescript": "3.5.3",
     "yup": "^0.27.0"
   },
@@ -48,6 +53,8 @@
     ]
   },
   "devDependencies": {
+    "@types/core-js": "^2.5.2",
+    "@types/yup": "^0.26.22",
     "babel-plugin-emotion": "^10.0.15",
     "babel-plugin-transform-runtime": "^6.23.0",
     "tslint": "^5.18.0",
