@@ -1,15 +1,17 @@
 import React, { PureComponent } from 'react';
-import Wrapper from './SigIn.style';
+import Switch from 'react-switch';
 import * as Yup from 'yup';
 import Select from '../../components/Select';
 
 export interface SigInProps {
   children: React.ReactNode;
+  race: boolean;
 }
 
 class SigIn extends PureComponent<SigInProps> {
   public static defaultProps: Partial<SigInProps> = {
     children: null
+  race: false
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
@@ -47,6 +49,12 @@ const SigInSchema = Yup.object().shape({
         options={options}
         component={Select}
         placeholder="Выберите тип"
+      />
+      <Switch
+        onChange={val => {
+          formikBag.setFieldValue('race', val);
+        }}
+        checked={formikBag.values.race}
       />
       validationSchema={SigInSchema}
 
