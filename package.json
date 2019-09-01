@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@types/core-js": "^2.5.2",
-    "@types/yup": "^0.26.22",
+    "@types/yup": "^0.26.23",
     "babel-plugin-emotion": "^10.0.15",
     "babel-plugin-transform-runtime": "^6.23.0",
     "tslint": "^5.18.0",
