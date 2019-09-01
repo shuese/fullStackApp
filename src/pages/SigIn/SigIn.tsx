@@ -1,17 +1,36 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Switch from 'react-switch';
 import * as Yup from 'yup';
+import {
+  Field,
+  Form,
+  Formik,
+  FormikActions,
+  FormikProps,
+  ErrorMessage
+} from 'formik';
 import Select from '../../components/Select';
 
-export interface SigInProps {
-  children: React.ReactNode;
+export interface FormValues {
+  singleLanguage: string;
+  firstName: string;
+  lastName: string;
+  nickName: string;
+  email: string;
+  password: string;
   race: boolean;
 }
 
-class SigIn extends PureComponent<SigInProps> {
-  public static defaultProps: Partial<SigInProps> = {
-    children: null
+const defaultValues: FormValues = {
+  singleLanguage: '',
+  firstName: '',
+  lastName: '',
+  nickName: '',
+  email: '',
+  password: '',
   race: false
+};
+
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
@@ -38,12 +57,25 @@ const SigInSchema = Yup.object().shape({
     .max(50, 'Слишком Длинное имя!')
     .required('Обезательное поле!')
 });
+
+const SigIn = () => {
+  const onSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+    alert(JSON.stringify(values, null, 2));
+    actions.setSubmitting(false);
   };
 
   const renderForm = (formikBag: FormikProps<FormValues>) => (
     <Form>
       <Field name="firstName" />
       <ErrorMessage name="firstName" />
+      <Field name="lastName" />
+      <ErrorMessage name="lastName" />
+      <Field type="email" name="email" />
+      <ErrorMessage name="email" />
+      <Field type="password" name="password" />
+      <ErrorMessage name="password" />
+      <Field type="nickName" name="nickName" />
+      <ErrorMessage name="nickName" />
       <Field
         name="typeUser"
         options={options}
@@ -56,6 +88,19 @@ const SigInSchema = Yup.object().shape({
         }}
         checked={formikBag.values.race}
       />
+
+      <button type="submit">Submit Form</button>
+    </Form>
+  );
+
+  return (
+    <Formik
+      initialValues={defaultValues}
+      render={renderForm}
+      onSubmit={onSubmit}
       validationSchema={SigInSchema}
+    />
+  );
+};
 
 export default SigIn;
