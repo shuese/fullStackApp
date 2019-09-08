@@ -3,14 +3,25 @@ import Switch from 'react-switch';
 import * as Yup from 'yup';
 import {
   Field,
-  Form,
   Formik,
   FormikActions,
   FormikProps,
-  ErrorMessage
 } from 'formik';
+import {
+  Entry,
+  Input,
+  FirstName,
+  LastName,
+  Email,
+  NickName,
+  TypeUser,
+  SwitchWrap,
+  Password,
+  SubmitWrap } from './SigIn.style';
 import Select from '../../components/Select';
-import ErrorComponent from '../../components/ErrorComponent';
+import Error from '../../components/ErrorControl';
+import Title from '../../components/TitleControl';
+import Submit from '../../components/Submit';
 
 export interface FormValues {
   singleLanguage: string;
@@ -49,7 +60,8 @@ const SigInSchema = Yup.object().shape({
     .required('Обезательное поле!'),
   nickName: Yup.string()
     .min(2, 'Слишком короткий ник!')
-    .max(50, 'Слишком длинный ник!'),
+    .max(50, 'Слишком длинный ник!')
+    .required('Обезательное поле!') ,
   email: Yup.string()
     .min(2, 'Слишком короткое имя!')
     .max(50, 'Слишком Длинное имя!'),
@@ -66,32 +78,54 @@ const SigIn = () => {
   };
 
   const renderForm = (formikBag: FormikProps<FormValues>) => (
-    <Form>
-      <Field name="firstName" />
-      <ErrorComponent name="firstName" />
-      {/* <Field name="lastName" />
-      <ErrorMessage name="lastName" /> */}
-      {/* <Field type="email" name="email" />
-      <ErrorMessage name="email" /> */}
-      {/* <Field type="password" name="password" />
-      <ErrorMessage name="password" /> */}
-      {/* <Field type="nickName" name="nickName" />
-      <ErrorMessage name="nickName" /> */}
-      {/* <Field
-        name="typeUser"
-        options={options}
-        component={Select}
-        placeholder="Выберите тип"
-      /> */}
-      {/* <Switch
-        onChange={val => {
-          formikBag.setFieldValue('race', val);
-        }}
-        checked={formikBag.values.race}
-      /> */}
-
-      <button type="submit">Submit Form</button>
-    </Form>
+    <Entry>
+      <FirstName>
+        <Title>Имя</Title>
+        <Input name="firstName" />
+        <Error name="firstName" />
+      </FirstName>
+      <LastName>
+        <Title>Фамилия</Title>
+        <Input name="lastName" />
+        <Error name="lastName" />
+      </LastName>
+      <NickName>
+        <Title>Никнейм</Title>
+        <Input type="nickName" name="nickName" />
+        <Error name="nickName" />
+      </NickName>
+      <Email>
+        <Title>Почта</Title>
+        <Input type="email" name="email" />
+        <Error name="email" />
+      </Email>
+      <TypeUser>
+        <Title>Выберите пользователя</Title>
+        <Field
+          name="typeUser"
+          options={options}
+          component={Select}
+          placeholder="Выберите тип"
+        />
+      </TypeUser>
+      <SwitchWrap>
+        <Title>Узнали? Согласны?</Title>
+        <Switch
+          onChange={val => {
+            formikBag.setFieldValue('race', val);
+          }}
+          checked={formikBag.values.race}
+        />
+      </SwitchWrap>
+      <Password>
+        <Title>Пароль</Title>
+        <Input type="password" name="password" />
+        <Error name="password" />
+      </Password>
+      <SubmitWrap>
+        <Submit type="submit">Запускаай!</Submit>
+      </SubmitWrap>
+    </Entry>
   );
 
   return (
