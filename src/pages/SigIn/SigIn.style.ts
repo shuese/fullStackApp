@@ -65,7 +65,6 @@ export const SwitchWrap = styled('div')`
 export const Password = styled('div')`
   grid-column: 3/5;
   grid-row: 3/4;
-  margin-left: 10px;
   display: flex;
   flex-direction: column;
 `
