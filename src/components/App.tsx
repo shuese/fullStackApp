@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Layout from '../components/Layout/Layout';
 import SigIn from '../pages/SigIn';
+import Main from '../pages/Main';
+import NotFound from '../pages/NotFound';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -16,7 +19,13 @@ const App: React.SFC<AppProps> = (props: AppProps) => {
       <Layout oneBlock={oneBlock}>
         <Layout.Header sticky>(づ￣ ³￣)づ</Layout.Header>
         <Layout.Content>
-          <SigIn />
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route path="/sigin" component={SigIn} />
+              <Route path="*" component={NotFound} />
+            </Switch>
+          </Router>
         </Layout.Content>
         {oneBlock ? null : <Layout.Sidebar>{children}</Layout.Sidebar>}
       </Layout>
