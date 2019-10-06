@@ -21,9 +21,9 @@ const App: React.SFC<AppProps> = (props: AppProps) => {
         <Layout.Content>
           <Router>
             <Switch>
-              <Route exact path="/" component={Main} />
-              <Route path="/sigin" component={SigIn} />
-              <Route path="*" component={NotFound} />
+              <Route exact path='/' component={Main} />
+              <Route path='/sigin' component={SigIn} />
+              <Route path='*' component={NotFound} />
             </Switch>
           </Router>
         </Layout.Content>

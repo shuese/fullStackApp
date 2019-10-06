@@ -23,7 +23,7 @@ import Error from '../../components/ErrorControl';
 import Title from '../../components/TitleControl';
 import Submit from '../../components/Submit';
 
-export interface FormValues {
+export interface IFormValues {
   singleLanguage: string;
   firstName: string;
   lastName: string;
@@ -33,7 +33,7 @@ export interface FormValues {
   race: boolean;
 }
 
-const defaultValues: FormValues = {
+const defaultValues: IFormValues = {
   singleLanguage: '',
   firstName: '',
   lastName: '',
@@ -44,9 +44,9 @@ const defaultValues: FormValues = {
 };
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+  { value: 'Разработчик', label: 'Разработчик' },
+  { value: 'Дизайнер', label: 'Дизайнер' },
+  { value: 'Тестировщик', label: 'Тестировщик' }
 ];
 
 const SigInSchema = Yup.object().shape({
@@ -72,40 +72,40 @@ const SigInSchema = Yup.object().shape({
 });
 
 const SigIn = () => {
-  const onSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+  const onSubmit = (values: IFormValues, actions: FormikActions<IFormValues>) => {
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
   };
 
-  const renderForm = (formikBag: FormikProps<FormValues>) => (
+  const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
       <FirstName>
         <Title>Имя</Title>
-        <Input name="firstName" />
-        <Error name="firstName" />
+        <Input name='firstName' />
+        <Error name='firstName' />
       </FirstName>
       <LastName>
         <Title>Фамилия</Title>
-        <Input name="lastName" />
-        <Error name="lastName" />
+        <Input name='lastName' />
+        <Error name='lastName' />
       </LastName>
       <NickName>
         <Title>Никнейм</Title>
-        <Input type="nickName" name="nickName" />
-        <Error name="nickName" />
+        <Input type='nickName' name='nickName' />
+        <Error name='nickName' />
       </NickName>
       <Email>
         <Title>Почта</Title>
-        <Input type="email" name="email" />
-        <Error name="email" />
+        <Input type='email' name='email' />
+        <Error name='email' />
       </Email>
       <TypeUser>
         <Title>Выберите пользователя</Title>
         <Field
-          name="typeUser"
+          name='typeUser'
           options={options}
           component={Select}
-          placeholder="Выберите тип"
+          placeholder='Выберите тип'
         />
       </TypeUser>
       <SwitchWrap>
@@ -119,11 +119,11 @@ const SigIn = () => {
       </SwitchWrap>
       <Password>
         <Title>Пароль</Title>
-        <Input type="password" name="password" />
-        <Error name="password" />
+        <Input type='password' name='password' />
+        <Error name='password' />
       </Password>
       <SubmitWrap>
-        <Submit type="submit">Запускаай!</Submit>
+        <Submit type='submit'>Запускаай!</Submit>
       </SubmitWrap>
     </Entry>
   );
