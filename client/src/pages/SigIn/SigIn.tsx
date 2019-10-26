@@ -24,7 +24,6 @@ import Title from '../../components/TitleControl';
 import Submit from '../../components/Submit';
 
 export interface IFormValues {
-  singleLanguage: string;
   firstName: string;
   lastName: string;
   nickName: string;
@@ -34,7 +33,6 @@ export interface IFormValues {
 }
 
 const defaultValues: IFormValues = {
-  singleLanguage: '',
   firstName: '',
   lastName: '',
   nickName: '',
@@ -63,10 +61,10 @@ const SigInSchema = Yup.object().shape({
     .max(50, 'Слишком длинный ник!')
     .required('Обезательное поле!') ,
   email: Yup.string()
-    .min(2, 'Слишком короткое имя!')
+    .min(6, 'Слишком короткое имя!')
     .max(50, 'Слишком Длинное имя!'),
   password: Yup.string()
-    .min(2, 'Слишком короткое имя!')
+    .min(10, 'Слишком короткое имя!')
     .max(50, 'Слишком Длинное имя!')
     .required('Обезательное поле!')
 });
