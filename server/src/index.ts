@@ -1,29 +1,46 @@
 import dotenv from 'dotenv';
 import expressPinoLogger from 'express-pino-logger';
 import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import passport from 'passport';
 import bodyParser from 'body-parser';
 import { logger } from './utils/logger';
+import userRoute from './routes/userRoute';
+import './utils/auth';
 
 dotenv.config();
-
-const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 const dbKey = process.env.DB_KEY;
 
 const app = express();
 
+app.use(cors());
 app.use(expressPinoLogger({ logger }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+
+mongoose.connect(dbKey, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  })
+  .then(() => {
+    console.log('Законектился к бд');
+  })
+  .catch(err => {
+    console.log('Что-то не так:', err);
+  });
+
+mongoose.set('debug', true);
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send(dbKey);
   console.log(dbKey, 'dbKey');
 });
 
-app.post('/sigin', urlencodedParser, (req, res) => {
-  if (!req.body) { return res.sendStatus(400); }
-  console.log(req.body);
-  res.send(req.body);
-});
+app.use(userRoute);
 
 app.listen(8080, () => {
   console.log('Следим за 8080!');
