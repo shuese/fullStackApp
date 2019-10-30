@@ -2,16 +2,16 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Layout from './Layout/Layout';
-import SigIn from '../pages/SigIn';
+import SignUp from '../pages/SignUp';
 import Main from '../pages/Main';
 import NotFound from '../pages/NotFound';
 
-interface AppProps {
+interface IAppProps {
   children?: React.ReactNode;
   oneBlock?: boolean;
 }
 
-const App: React.SFC<AppProps> = (props: AppProps) => {
+const App: React.SFC<IAppProps> = (props: IAppProps) => {
   const { children, oneBlock } = props;
   return (
     <Fragment>
@@ -22,7 +22,7 @@ const App: React.SFC<AppProps> = (props: AppProps) => {
           <Router>
             <Switch>
               <Route exact path='/' component={Main} />
-              <Route path='/sigin' component={SigIn} />
+              <Route path='/signup' component={SignUp} />
               <Route path='*' component={NotFound} />
             </Switch>
           </Router>
