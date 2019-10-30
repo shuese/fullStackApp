@@ -17,7 +17,7 @@ import {
   TypeUser,
   SwitchWrap,
   Password,
-  SubmitWrap } from './SigIn.style';
+  SubmitWrap } from './SignUp.style';
 import Select from '../../components/Select';
 import Error from '../../components/ErrorControl';
 import Title from '../../components/TitleControl';
@@ -47,7 +47,7 @@ const options = [
   { value: 'Тестировщик', label: 'Тестировщик' }
 ];
 
-const SigInSchema = Yup.object().shape({
+const SignUpSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, 'Слишком короткое имя!')
     .max(50, 'Слишком Длинное имя!')
@@ -69,7 +69,7 @@ const SigInSchema = Yup.object().shape({
     .required('Обезательное поле!')
 });
 
-const SigIn = () => {
+const SignUp = () => {
   const onSubmit = (values: IFormValues, actions: FormikActions<IFormValues>) => {
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
@@ -131,9 +131,9 @@ const SigIn = () => {
       initialValues={defaultValues}
       render={renderForm}
       onSubmit={onSubmit}
-      validationSchema={SigInSchema}
+      validationSchema={SignUpSchema}
     />
   );
 };
 
-export default SigIn;
+export default SignUp;

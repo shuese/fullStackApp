@@ -1,11 +1,11 @@
 import React from 'react';
 import Wrapper from './Main.style';
 
-interface MainProps {
+interface IMainProps {
   children?: React.ReactNode | string;
 }
 
-const Main: React.SFC<MainProps> = (props: MainProps) => {
+const Main: React.SFC<IMainProps> = (props: IMainProps) => {
   // const { children } = props;
   return (
     <Wrapper>

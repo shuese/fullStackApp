@@ -1,11 +1,11 @@
 import React from 'react';
 import Title from './TitleControl.style';
 
-interface TitleProps {
+interface ITitleProps {
   children?: React.ReactNode | string;
 }
 
-const TitleControl: React.SFC<TitleProps> = (props: TitleProps) => {
+const TitleControl: React.SFC<ITitleProps> = (props: ITitleProps) => {
   const { children } = props;
   return (
     <Title>
