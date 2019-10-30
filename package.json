@@ -22,8 +22,5 @@
     "acorn": "^7.1.0",
     "concurrently": "^4.1.0",
     "webpack-node-externals": "^1.7.2"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3"
   }
 }
