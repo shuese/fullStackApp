@@ -36,8 +36,7 @@ mongoose.connect(dbKey, {
 mongoose.set('debug', true);
 
 app.get('/', (req: express.Request, res: express.Response) => {
-  res.send(dbKey);
-  console.log(dbKey, 'dbKey');
+  res.send({1: 'один', 2: 'два'});
 });
 
 app.use(userRoute);
