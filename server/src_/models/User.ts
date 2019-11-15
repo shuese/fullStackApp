@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     trim: true,
     unique: true,
     sparse: true,
-    required: true,
+    required: 'Обязательное поле!',
     minLength: 2
   },
   password : {
@@ -30,23 +30,23 @@ const UserSchema = new Schema({
     trim: true,
     unique: true,
     sparse: true,
-    required: true
+    required: 'Обязательное поле!',
   },
   firstName: {
     type: String,
-    required: true,
+    required: 'Обязательное поле!',
     trim: true,
     minLength: 2
   },
   lastName: {
     type: String,
-    required: true,
+    required: 'Обязательное поле!',
     trim: true,
     minLength: 2
   },
   email: {
     type: String,
-    required: true,
+    required: 'Обязательное поле!',
     trim: true,
     unique: true,
     minLength: 6,

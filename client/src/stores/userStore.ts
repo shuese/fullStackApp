@@ -1,24 +1,16 @@
-import { observable, action } from 'mobx';
+import { configure, observable, action } from 'mobx';
 import axios from 'axios';
 
+configure({ enforceActions: 'observed' });
+
 export class UserStore {
-  @observable public title = {};
-
-  constructor() {
-    this.fetchData();
-  }
-
- @action
-  private fetchData() {
-    axios.get('http://localhost:8080/')
-      .then(response => {
-        console.log(response.data, '@@@');
-      })
-      .then(response => {
-        this.title = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  @action
+  public signupUser = async (signValue: object) => {
+    try {
+      const response = await axios.post('/signup', signValue);
+      console.log(response, 'response');
+    } catch (error) {
+      console.log(error, 'error');
+    }
   }
 }

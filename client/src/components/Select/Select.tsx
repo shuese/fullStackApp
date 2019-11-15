@@ -10,13 +10,13 @@ export type ValueType<OptionType> =
   | null
   | undefined;
 
-interface Option {
+interface IOption {
   label: string;
   value: string;
 }
 
-interface CustomSelectProps extends FieldProps {
-  options: OptionsType<Option>;
+interface ICustomSelectProps extends FieldProps {
+  options: OptionsType<IOption>;
   placeholder?: string;
 }
 
@@ -25,9 +25,9 @@ export const CustomSelect = ({
   field,
   form,
   options
-}: CustomSelectProps) => {
-  const onChange = (option: ValueType<Option>) => {
-    form.setFieldValue(field.name, (option as Option).value);
+}: ICustomSelectProps) => {
+  const onChange = (option: ValueType<IOption>) => {
+    form.setFieldValue(field.name, (option as IOption).value);
   };
 
   const getValue = () => {

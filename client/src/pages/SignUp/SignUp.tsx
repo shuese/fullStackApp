@@ -1,5 +1,6 @@
 import React from 'react';
 import Switch from 'react-switch';
+import { observer, inject } from 'mobx-react';
 import * as Yup from 'yup';
 import {
   Field,
@@ -29,6 +30,7 @@ export interface IFormValues {
   nickName: string;
   email: string;
   password: string;
+  type: string;
   race: boolean;
 }
 
@@ -38,13 +40,14 @@ const defaultValues: IFormValues = {
   nickName: '',
   email: '',
   password: '',
+  type: '',
   race: false
 };
 
 const options = [
-  { value: 'Разработчик', label: 'Разработчик' },
-  { value: 'Дизайнер', label: 'Дизайнер' },
-  { value: 'Тестировщик', label: 'Тестировщик' }
+  { value: 'developer', label: 'Разработчик' },
+  { value: 'designer', label: 'дизайнер' },
+  { value: 'qa', label: 'Тестировщик' }
 ];
 
 const SignUpSchema = Yup.object().shape({
@@ -61,19 +64,20 @@ const SignUpSchema = Yup.object().shape({
     .max(50, 'Слишком длинный ник!')
     .required('Обезательное поле!') ,
   email: Yup.string()
-    .min(6, 'Слишком короткое имя!')
-    .max(50, 'Слишком Длинное имя!'),
+    .min(6, 'Слишком короткая почта!')
+    .max(50, 'Слишком длинная почта!')
+    .email('Нужну ввести почту!'),
   password: Yup.string()
-    .min(10, 'Слишком короткое имя!')
-    .max(50, 'Слишком Длинное имя!')
+    .min(10, 'Слишком короткий пароль!')
+    .max(50, 'Слишком длинный пароль!')
     .required('Обезательное поле!')
 });
 
-const SignUp = () => {
-  const onSubmit = (values: IFormValues, actions: FormikActions<IFormValues>) => {
-    alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
-  };
+const SignUp = (props: any) => {
+  // const onSubmit = (values: IFormValues, actions: FormikActions<IFormValues>) => {
+  //   alert(JSON.stringify(values, null, 2));
+  //   actions.setSubmitting(false);
+  // };
 
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
@@ -100,7 +104,7 @@ const SignUp = () => {
       <TypeUser>
         <Title>Выберите пользователя</Title>
         <Field
-          name='typeUser'
+          name='type'
           options={options}
           component={Select}
           placeholder='Выберите тип'
@@ -130,10 +134,14 @@ const SignUp = () => {
     <Formik
       initialValues={defaultValues}
       render={renderForm}
-      onSubmit={onSubmit}
+      onSubmit={(values, {setSubmitting, resetForm}) => {
+        console.log(values, 'values');
+        props.userStore.signupUser(values);
+        console.log('values', values);
+    }}
       validationSchema={SignUpSchema}
     />
   );
 };
 
-export default SignUp;
+export default inject('userStore')(observer(SignUp));

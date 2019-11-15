@@ -28,10 +28,12 @@
     "@types/cors": "^2.8.6",
     "@types/express-pino-logger": "^4.0.2",
     "@types/jsonwebtoken": "^8.3.4",
+    "@types/mongoose-unique-validator": "^1.0.3",
     "@types/passport": "^1.0.1",
     "@types/passport-jwt": "^3.0.2",
     "@types/passport-local": "^1.0.33",
     "@types/pino": "^5.8.10",
+    "@types/validator": "^10.11.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
@@ -42,11 +44,14 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.10",
     "mongoose": "^5.7.3",
+    "mongoose-beautiful-unique-validation": "^7.1.1",
+    "mongoose-unique-validator": "^2.0.3",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pino": "^5.13.4",
     "pino-pretty": "^3.2.1",
-    "validate": "^5.0.0"
+    "validate": "^5.0.0",
+    "validator": "^12.0.0"
   }
 }
