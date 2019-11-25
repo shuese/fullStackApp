@@ -24,35 +24,35 @@ export const FirstName = styled('div')`
   grid-row: 1/2;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const LastName = styled('div')`
   grid-column: 3/5;
   grid-row: 1/2;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const Email = styled('div')`
   grid-column: 1/3;
   grid-row: 2/3;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const NickName = styled('div')`
   grid-column: 3/5;
   grid-row: 2/3;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const TypeUser = styled('div')`
   grid-column: 1/2;
   grid-row: 3/4;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const SwitchWrap = styled('div')`
   grid-column: 2/3;
@@ -60,18 +60,18 @@ export const SwitchWrap = styled('div')`
   margin-left: 10px;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const Password = styled('div')`
   grid-column: 3/5;
   grid-row: 3/4;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const SubmitWrap = styled('div')`
   grid-column: 4/5;
   grid-row: 4/5;
   display: flex;
   justify-content: flex-end;
-`
+`;

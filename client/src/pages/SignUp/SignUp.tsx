@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Switch from 'react-switch';
 import { observer, inject } from 'mobx-react';
 import * as Yup from 'yup';
 import {
   Field,
   Formik,
-  FormikActions,
   FormikProps,
 } from 'formik';
 import {
@@ -18,7 +17,8 @@ import {
   TypeUser,
   SwitchWrap,
   Password,
-  SubmitWrap } from './SignUp.style';
+  SubmitWrap
+} from './SignUp.style';
 import Select from '../../components/Select';
 import Error from '../../components/ErrorControl';
 import Title from '../../components/TitleControl';
@@ -74,11 +74,7 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = (props: any) => {
-  // const onSubmit = (values: IFormValues, actions: FormikActions<IFormValues>) => {
-  //   alert(JSON.stringify(values, null, 2));
-  //   actions.setSubmitting(false);
-  // };
-
+  console.log(props.userStore.status, 'init');
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
       <FirstName>
@@ -93,7 +89,7 @@ const SignUp = (props: any) => {
       </LastName>
       <NickName>
         <Title>Никнейм</Title>
-        <Input type='nickName' name='nickName' />
+        <Input name='nickName' />
         <Error name='nickName' />
       </NickName>
       <Email>
@@ -125,7 +121,7 @@ const SignUp = (props: any) => {
         <Error name='password' />
       </Password>
       <SubmitWrap>
-        <Submit type='submit'>Запускаай!</Submit>
+        <Submit type='submit'>{props.userStore.status}</Submit>
       </SubmitWrap>
     </Entry>
   );
@@ -135,9 +131,12 @@ const SignUp = (props: any) => {
       initialValues={defaultValues}
       render={renderForm}
       onSubmit={(values, {setSubmitting, resetForm}) => {
-        console.log(values, 'values');
-        props.userStore.signupUser(values);
-        console.log('values', values);
+        try {
+          props.userStore.signupUser(values);
+          console.log(props.userStore.status, 'props');
+        } catch (error) {
+          console.log('status err');
+        }
     }}
       validationSchema={SignUpSchema}
     />

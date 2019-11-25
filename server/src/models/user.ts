@@ -19,7 +19,7 @@ interface IUsesr extends Document {
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  nickName : {
+  nickName: {
     type: String,
     default: null,
     trim: true,
@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     minlength: [2, 'Слишком короткий ник!'],
     maxlength: [50, 'Слишком длинный ник!']
   },
-  password : {
+  password: {
     type: String,
     default: null,
     trim: true,

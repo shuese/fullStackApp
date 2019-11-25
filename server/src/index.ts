@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-// import expressPinoLogger from 'express-pino-logger';
+import expressPinoLogger from 'express-pino-logger';
 import express from 'express';
 import mongoose from 'mongoose';
-// import cors from 'cors';
+import cors from 'cors';
 // import passport from 'passport';
 import bodyParser from 'body-parser';
 import userRoute from './routes/user';
@@ -15,8 +15,8 @@ const dbKey = process.env.DB_KEY;
 
 const app = express();
 
-// app.use(cors());
-// app.use(expressPinoLogger({ logger }));
+app.use(cors());
+app.use(expressPinoLogger({ logger }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(passport.initialize());
