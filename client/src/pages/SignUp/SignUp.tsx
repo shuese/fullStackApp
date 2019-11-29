@@ -130,12 +130,13 @@ const SignUp = (props: any) => {
     <Formik
       initialValues={defaultValues}
       render={renderForm}
-      onSubmit={(values, {setSubmitting, resetForm}) => {
+      onSubmit={async (values, {setSubmitting, resetForm}) => {
         try {
-          props.userStore.signupUser(values);
+          await props.userStore.signupUser(values);
+          await resetForm();
           console.log(props.userStore.status, 'props');
         } catch (error) {
-          console.log('status err');
+          console.log(error, 'status err');
         }
     }}
       validationSchema={SignUpSchema}
