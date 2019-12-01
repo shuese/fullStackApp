@@ -73,8 +73,8 @@ const SignUpSchema = Yup.object().shape({
     .required('Обезательное поле!')
 });
 
-const SignUp = (props: any) => {
-  console.log(props.userStore.status, 'init');
+const SignUp = ({ userStore }: any) => {
+  console.log(userStore.status, 'init');
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
       <FirstName>
@@ -121,7 +121,13 @@ const SignUp = (props: any) => {
         <Error name='password' />
       </Password>
       <SubmitWrap>
-        <Submit type='submit'>{props.userStore.status}</Submit>
+        <Submit
+          status={userStore.status}
+          disabled={formikBag.isSubmitting}
+          type='submit'
+        >
+          {userStore.status}
+        </Submit>
       </SubmitWrap>
     </Entry>
   );
@@ -132,9 +138,9 @@ const SignUp = (props: any) => {
       render={renderForm}
       onSubmit={async (values, {setSubmitting, resetForm}) => {
         try {
-          await props.userStore.signupUser(values);
+          await userStore.signupUser(values);
           await resetForm();
-          console.log(props.userStore.status, 'props');
+          console.log(userStore.status, 'props');
         } catch (error) {
           console.log(error, 'status err');
         }

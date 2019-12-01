@@ -1,15 +1,26 @@
 import React from 'react';
 import Sbm from './Submit.style';
 
-export interface ISubmitProps extends React.HTMLAttributes<HTMLElement> {
-  children: string;
+interface ISubmitProps extends React.HTMLAttributes<HTMLElement> {
+  status: 'progress' | 'error' | 'succes' | 'pending';
   type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean | undefined;
 }
 
 class Submit extends React.Component<ISubmitProps> {
-  public render() {
-    const { children, type } = this.props;
-    return <Sbm type={type}>{children}</Sbm>;
+  render() {
+    const { type, status, disabled } = this.props;
+    let textButton;
+    if (status === 'progress') {
+      textButton = 'отправляется...';
+    } else if (status === 'error') {
+      textButton = 'не загрузилось :(';
+    } else if (status === 'succes') {
+      textButton = 'отправилось!';
+    } else {
+      textButton = 'отправить!';
+    }
+    return <Sbm disabled={disabled} type={type}>{textButton}</Sbm>;
   }
 }
 
