@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 
-type LayoutProps = {
+interface ILayoutProps {
   oneBlock: boolean;
-};
+}
 
-const Wrapper = styled('div')<LayoutProps>`
+const Wrapper = styled('div')<ILayoutProps>`
   min-height: 100%;
   padding: 7px;
   display: grid;
   grid-template-areas: 'header header header' 'nav main aside';
   grid-gap: 10px;
-  ${(p: LayoutProps) =>
+  ${(p: ILayoutProps) =>
     p.oneBlock &&
     `
     grid-template-areas: 'header header header' 'main main main';
@@ -19,7 +19,7 @@ const Wrapper = styled('div')<LayoutProps>`
   grid-template-columns: minmax(200px, 0.3fr) minmax(320px, 1fr);
   grid-template-rows: 50px 91vh;
   @media (max-width: 640px) {
-    ${(p: LayoutProps) =>
+    ${(p: ILayoutProps) =>
       p.oneBlock &&
       `
     grid-template-areas: 'header header header' 'main main main';

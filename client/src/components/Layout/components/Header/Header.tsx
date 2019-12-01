@@ -2,40 +2,40 @@ import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
 import Wrapper from './Header.style';
 
-export interface HeaderProps {
+export interface IHeaderProps {
   children: React.ReactNode;
   fixed?: boolean;
   sticky?: boolean;
 }
 
-export interface HeaderState {
+export interface IHeaderState {
   show: boolean;
   scrollPos: 0;
 }
 
-class Header extends PureComponent<HeaderProps> {
-  public static defaultProps: Partial<HeaderProps> = {
+class Header extends PureComponent<IHeaderProps> {
+  static defaultProps: Partial<IHeaderProps> = {
     children: null,
     sticky: false
   };
-  public state = {
+  state = {
     show: true,
     scrollPos: 0
   };
 
-  public componentDidMount() {
+  componentDidMount() {
     const { sticky } = this.props;
     if (sticky) {
       window.addEventListener('scroll', this.handleScroll);
     }
   }
 
-  public componentWillUnmount() {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
   @autobind
-  public handleScroll() {
+  handleScroll() {
     const { scrollPos } = this.state;
     const { sticky } = this.props;
     if (sticky) {
@@ -46,7 +46,7 @@ class Header extends PureComponent<HeaderProps> {
     }
   }
 
-  public render() {
+  render() {
     const { children } = this.props;
     const { show } = this.state;
     return <Wrapper show={show}>{children}</Wrapper>;
