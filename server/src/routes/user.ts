@@ -13,7 +13,7 @@ router.post('/signup', (req: any, res: any) => {
 
   user.save((err: any) => {
     if (err) {
-      return res.status(228).send({message: 'error', error: err});
+      return res.status(500).send({message: err});
     }
     return res.send({message: 'succes'});
   });

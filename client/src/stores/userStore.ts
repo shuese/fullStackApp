@@ -1,37 +1,41 @@
-import { configure, observable, action, runInAction } from 'mobx';
+import {
+  configure,
+  observable,
+  action,
+  runInAction,
+  } from 'mobx';
 import axios from 'axios';
 
 configure({ enforceActions: 'observed' });
 
+type error = boolean | null;
+
 export class UserStore {
   @observable status: string = 'pending';
+  @observable statusValidate: error =  null;
+
+  setActions(status: string, delay?: boolean) {
+    delay
+    ? setTimeout(() => {
+        runInAction(() => {
+          this.status = status;
+        })
+    }, 2500)
+    : runInAction(() => {
+        this.status = status;
+      });
+  }
 
   @action
-  signupUser = async (signValue: object) => {
-    await runInAction('progress', () => {
-      this.status = 'progress';
-    });
+  signUpUser = async (signValue: object) => {
+    this.setActions('progress');
     try {
-      const response = await axios.post('/signup', signValue);
-      await runInAction('succes', () => {
-        this.status = 'succes';
-      });
-      await setTimeout(() => {
-        runInAction('succes post pending', () => {
-          this.status = 'pending';
-        });
-      }, 2500);
-      console.log(response, 'response');
+      await axios.post('/signup', signValue);
+      this.setActions('succes');
+      this.setActions('pending', true);
     } catch (error) {
-      runInAction('press f', () => {
-        this.status = 'press f';
-      });
-      setTimeout(() => {
-        runInAction('press f post pending', () => {
-          this.status = 'pending';
-        });
-      }, 2500);
-      console.log(error, 'error');
+      this.setActions('pressF');
+      this.setActions('pending', true);
     }
   }
 }

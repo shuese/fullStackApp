@@ -9,7 +9,13 @@ import userRoute from './routes/user';
 import { logger } from './utils/logger';
 import './utils/auth';
 
-dotenv.config();
+const result = dotenv.config()
+ 
+if (result.error) {
+  throw result.error
+}
+ 
+console.log(result.parsed, 'result.parsed')
 
 const dbKey = process.env.DB_KEY;
 

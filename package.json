@@ -16,11 +16,12 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "serve": "cd server && node build/server.js"
+    "serve": "cd server && node build/server.js",
+    "start": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
   "devDependencies": {
     "acorn": "^7.1.0",
-    "concurrently": "^4.1.0",
+    "concurrently": "5.0.2",
     "webpack-node-externals": "^1.7.2"
   }
 }

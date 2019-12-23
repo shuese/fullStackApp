@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Switch from 'react-switch';
 import { observer, inject } from 'mobx-react';
 import * as Yup from 'yup';
@@ -138,8 +138,8 @@ const SignUp = ({ userStore }: any) => {
       render={renderForm}
       onSubmit={async (values, {setSubmitting, resetForm}) => {
         try {
-          await userStore.signupUser(values);
-          await resetForm();
+          await userStore.signUpUser(values);
+          resetForm();
           console.log(userStore.status, 'props');
         } catch (error) {
           console.log(error, 'status err');
