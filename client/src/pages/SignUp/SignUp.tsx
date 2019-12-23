@@ -144,7 +144,7 @@ const SignUp = ({ userStore }: any) => {
         } catch (error) {
           console.log(error, 'status err');
         }
-    }}
+      }}
       validationSchema={SignUpSchema}
     />
   );
