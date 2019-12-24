@@ -13,16 +13,17 @@ type error = boolean | null;
 export class UserStore {
   @observable status: string = 'pending';
   @observable statusValidate: error =  null;
+  @observable erros: {} = {};
 
-  setActions(status: string, delay?: boolean) {
+  setActions(observable: string, delay?: boolean) {
     delay
     ? setTimeout(() => {
         runInAction(() => {
-          this.status = status;
+          observable = status;
         })
     }, 2500)
     : runInAction(() => {
-        this.status = status;
+        observable = status;
       });
   }
 
@@ -36,6 +37,10 @@ export class UserStore {
     } catch (error) {
       this.setActions('pressF');
       this.setActions('pending', true);
+      runInAction(() => {
+        this.erros = error.response;;
+      }); 
+      console.log(this.erros, 'error');
     }
   }
 }

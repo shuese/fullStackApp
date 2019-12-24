@@ -74,7 +74,7 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ userStore }: any) => {
-  console.log(userStore.status, 'init');
+  console.log(userStore, 'me@codcerw24.ru');
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
       <FirstName>
@@ -136,11 +136,10 @@ const SignUp = ({ userStore }: any) => {
     <Formik
       initialValues={defaultValues}
       render={renderForm}
-      onSubmit={async (values, {setSubmitting, resetForm}) => {
+      onSubmit={async (values, {resetForm}) => {
         try {
           await userStore.signUpUser(values);
           resetForm();
-          console.log(userStore.status, 'props');
         } catch (error) {
           console.log(error, 'status err');
         }
