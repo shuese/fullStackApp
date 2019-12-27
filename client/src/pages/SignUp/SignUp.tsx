@@ -74,7 +74,12 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ userStore }: any) => {
+<<<<<<< Updated upstream
   console.log(userStore, 'me@codcerw24.ru');
+=======
+  console.log(userStore.ErrorStatus, 'init');
+  console.log(userStore.status, 'init');
+>>>>>>> Stashed changes
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
       <FirstName>
@@ -140,6 +145,11 @@ const SignUp = ({ userStore }: any) => {
         try {
           await userStore.signUpUser(values);
           resetForm();
+<<<<<<< Updated upstream
+=======
+          console.log(userStore.status, 'method');
+          console.log(userStore.ErrorStatus, 'method');
+>>>>>>> Stashed changes
         } catch (error) {
           console.log(error, 'status err');
         }
