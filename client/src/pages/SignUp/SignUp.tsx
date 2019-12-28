@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Switch from 'react-switch';
 import { observer, inject } from 'mobx-react';
 import * as Yup from 'yup';
@@ -73,12 +73,17 @@ const SignUpSchema = Yup.object().shape({
     .required('Обезательное поле!')
 });
 
+<<<<<<< Updated upstream
 const SignUp = ({ userStore }: any) => {
 <<<<<<< Updated upstream
   console.log(userStore, 'me@codcerw24.ru');
 =======
   console.log(userStore.ErrorStatus, 'init');
   console.log(userStore.status, 'init');
+>>>>>>> Stashed changes
+=======
+const SignUp = (props: any) => {
+  console.log(props.userStore.status, 'init');
 >>>>>>> Stashed changes
   const renderForm = (formikBag: FormikProps<IFormValues>) => (
     <Entry>
@@ -126,13 +131,7 @@ const SignUp = ({ userStore }: any) => {
         <Error name='password' />
       </Password>
       <SubmitWrap>
-        <Submit
-          status={userStore.status}
-          disabled={formikBag.isSubmitting}
-          type='submit'
-        >
-          {userStore.status}
-        </Submit>
+        <Submit type='submit'>{props.userStore.status}</Submit>
       </SubmitWrap>
     </Entry>
   );
@@ -141,6 +140,7 @@ const SignUp = ({ userStore }: any) => {
     <Formik
       initialValues={defaultValues}
       render={renderForm}
+<<<<<<< Updated upstream
       onSubmit={async (values, {resetForm}) => {
         try {
           await userStore.signUpUser(values);
@@ -150,8 +150,14 @@ const SignUp = ({ userStore }: any) => {
           console.log(userStore.status, 'method');
           console.log(userStore.ErrorStatus, 'method');
 >>>>>>> Stashed changes
+=======
+      onSubmit={(values, {setSubmitting, resetForm}) => {
+        try {
+          props.userStore.signupUser(values);
+          console.log(props.userStore.status, 'props');
+>>>>>>> Stashed changes
         } catch (error) {
-          console.log(error, 'status err');
+          console.log('status err');
         }
       }}
       validationSchema={SignUpSchema}

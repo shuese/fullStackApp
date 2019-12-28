@@ -14,7 +14,11 @@ router.post('/signup', (req: any, res: any) => {
   user.save((err: any) => {
     if (err) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       return res.status(403).send({message: err});
+=======
+      return res.status(404).send({message: err});
+>>>>>>> Stashed changes
 =======
       return res.status(404).send({message: err});
 >>>>>>> Stashed changes

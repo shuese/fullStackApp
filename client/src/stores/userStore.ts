@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
  
+=======
+>>>>>>> Stashed changes
 import { configure, observable, action, runInAction } from 'mobx';
 import axios from 'axios';
 
@@ -6,6 +9,7 @@ configure({ enforceActions: 'observed' });
 
 export class UserStore {
   @observable status: string = 'pending';
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   @observable statusValidate: error =  null;
   @observable erros: {} = {};
@@ -26,6 +30,11 @@ export class UserStore {
 
   @action
   signUpUser = async (signValue: object) => {
+=======
+
+  @action
+  signupUser = async (signValue: object) => {
+>>>>>>> Stashed changes
     await runInAction('progress', () => {
       this.status = 'progress';
     });
@@ -42,6 +51,7 @@ export class UserStore {
       console.log(response, 'response');
     } catch (error) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       this.setActions('pressF');
       this.setActions('pending', true);
       runInAction(() => {
@@ -49,6 +59,8 @@ export class UserStore {
       }); 
       console.log(this.erros, 'error');
 =======
+=======
+>>>>>>> Stashed changes
       runInAction('press f', () => {
         this.status = 'press f';
       });
@@ -58,6 +70,9 @@ export class UserStore {
         });
       }, 2500);
       console.log(error, 'error');
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
   }
