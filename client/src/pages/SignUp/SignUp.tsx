@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Switch from 'react-switch';
+import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import * as Yup from 'yup';
 import {
   Field,
   Formik,
-  FormikProps,
+  FormikValues
 } from 'formik';
 import {
   Entry,
@@ -74,78 +75,93 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ userStore }: any) => {
-  console.log(userStore, 'me@codcerw24.ru');
-  const renderForm = (formikBag: FormikProps<IFormValues>) => (
-    <Entry>
-      <FirstName>
-        <Title>Имя</Title>
-        <Input name='firstName' />
-        <Error name='firstName' />
-      </FirstName>
-      <LastName>
-        <Title>Фамилия</Title>
-        <Input name='lastName' />
-        <Error name='lastName' />
-      </LastName>
-      <NickName>
-        <Title>Никнейм</Title>
-        <Input name='nickName' />
-        <Error name='nickName' />
-      </NickName>
-      <Email>
-        <Title>Почта</Title>
-        <Input type='email' name='email' />
-        <Error name='email' />
-      </Email>
-      <TypeUser>
-        <Title>Выберите пользователя</Title>
-        <Field
-          name='type'
-          options={options}
-          component={Select}
-          placeholder='Выберите тип'
-        />
-      </TypeUser>
-      <SwitchWrap>
-        <Title>Узнали? Согласны?</Title>
-        <Switch
-          onChange={val => {
-            formikBag.setFieldValue('race', val);
-          }}
-          checked={formikBag.values.race}
-        />
-      </SwitchWrap>
-      <Password>
-        <Title>Пароль</Title>
-        <Input type='password' name='password' />
-        <Error name='password' />
-      </Password>
-      <SubmitWrap>
-        <Submit
-          status={userStore.status}
-          disabled={formikBag.isSubmitting}
-          type='submit'
-        >
-          {userStore.status}
-        </Submit>
-      </SubmitWrap>
-    </Entry>
-  );
+  const [, setStatus] = useState(userStore.status);
 
+  useEffect(() => {
+    if (!userStore.status) {
+      setStatus(userStore.status);
+    }
+  }, [userStore.status]);
+
+  const onSubmit = async (values: {}, { resetForm, setSubmitting }: FormikValues) => {
+    try {
+      if (userStore.code === 404) {
+        setSubmitting(false);
+        console.log('kek');
+      }
+      await userStore.signUpUser(values);
+      resetForm();
+    } catch (error) {
+      console.log(error, 'error');
+    }
+  };
+
+  const onValidate = (values: FormikValues) => {
+    const errors: {} = {};
+  };
   return (
     <Formik
       initialValues={defaultValues}
-      render={renderForm}
-      onSubmit={async (values, {resetForm}) => {
-        try {
-          await userStore.signUpUser(values);
-          resetForm();
-        } catch (error) {
-          console.log(error, 'status err');
-        }
-      }}
+      validate={onValidate}
+      onSubmit={onSubmit}
       validationSchema={SignUpSchema}
-    />
+      enableReinitialize
+    >
+      {props => (
+        <Entry>
+        <FirstName>
+          <Title>Имя</Title>
+          <Input name='firstName' />
+          <Error name='firstName' />
+        </FirstName>
+        <LastName>
+          <Title>Фамилия</Title>
+          <Input name='lastName' />
+          <Error name='lastName' />
+        </LastName>
+        <NickName>
+          <Title>Никнейм</Title>
+          <Input name='nickName' />
+          <Error name='nickName' />
+        </NickName>
+        <Email>
+          <Title>Почта</Title>
+          <Input type='email' name='email' />
+          <Error name='email' />
+        </Email>
+        <TypeUser>
+          <Title>Выберите пользователя</Title>
+          <Field
+            name='type'
+            options={options}
+            component={Select}
+            placeholder='Выберите тип'
+          />
+        </TypeUser>
+        <SwitchWrap>
+          <Title>Узнали? Согласны?</Title>
+          <Switch
+            onChange={val => {
+              props.setFieldValue('race', val);
+            }}
+            checked={props.values.race}
+          />
+        </SwitchWrap>
+        <Password>
+          <Title>Пароль</Title>
+          <Input type='password' name='password' />
+          <Error name='password' />
+        </Password>
+        <SubmitWrap>
+          <Submit
+            status={userStore.status}
+            disabled={props.isSubmitting}
+            type='submit'
+          />
+        </SubmitWrap>
+      </Entry>
+      )}
+    </Formik>
   );
 };
 
