@@ -140,6 +140,7 @@ const SignUp = ({ userStore }: any) => {
         <SwitchWrap>
           <Title>Узнали? Согласны?</Title>
           <Switch
+            name='race'
             onChange={val => {
               props.setFieldValue('race', val);
             }}
