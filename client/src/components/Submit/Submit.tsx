@@ -2,7 +2,7 @@ import React from 'react';
 import Sbm from './Submit.style';
 
 interface ISubmitProps extends React.HTMLAttributes<HTMLElement> {
-  status: 'progress' | 'error' | 'succes' | 'pending';
+  status: 'progress' | 'pressF' | 'succes' | 'pending';
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean | undefined;
 }
@@ -13,7 +13,7 @@ class Submit extends React.Component<ISubmitProps> {
     let textButton;
     if (status === 'progress') {
       textButton = 'отправляется...';
-    } else if (status === 'error') {
+    } else if (status === 'pressF') {
       textButton = 'не загрузилось :(';
     } else if (status === 'succes') {
       textButton = 'отправилось!';

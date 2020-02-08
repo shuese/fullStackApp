@@ -1,5 +1,4 @@
 
- 
 import React, { useState, useEffect } from 'react';
 import Switch from 'react-switch';
 import { toJS } from 'mobx';

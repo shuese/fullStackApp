@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Form, Field } from 'formik';
+import { Form, FastField } from 'formik';
 
 export const Entry = styled(Form)`
   display: grid;
@@ -13,7 +13,7 @@ export const Entry = styled(Form)`
   padding-right: 10px;
 `;
 
-export const Input = styled(Field)`
+export const Input = styled(FastField)`
   border: none;
   border-bottom: 2px solid #300;
   font-size: 24px;
