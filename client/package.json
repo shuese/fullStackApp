@@ -69,6 +69,6 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "postinstall": "npm run build",
-    "cypress": "cypress open"
+    "e2e": "cypress open"
   }
 }
