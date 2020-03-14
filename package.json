@@ -20,7 +20,7 @@
     "start": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
   "devDependencies": {
-    "acorn": "^7.1.0",
+    "acorn": "^7.1.1",
     "concurrently": "5.0.2",
     "webpack-node-externals": "^1.7.2"
   }
