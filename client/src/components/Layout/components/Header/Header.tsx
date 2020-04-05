@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import { autobind } from 'core-decorators';
-import Wrapper from './Header.style';
+import React, { PureComponent } from "react";
+import { autobind } from "core-decorators";
+import Wrapper from "./Header.style";
 
 export interface IHeaderProps {
   children: React.ReactNode;
@@ -26,12 +26,12 @@ class Header extends PureComponent<IHeaderProps> {
   componentDidMount() {
     const { sticky } = this.props;
     if (sticky) {
-      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener("scroll", this.handleScroll);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   @autobind

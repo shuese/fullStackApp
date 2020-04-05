@@ -1,9 +1,9 @@
-import mongoose, {  Document } from 'mongoose';
-import { isEmail } from 'validator';
-import beautifyUnique from 'mongoose-unique-validator';
-import bcrypt from 'bcrypt';
+import mongoose, { Document } from "mongoose";
+import { isEmail } from "validator";
+import uniqueValidator from "mongoose-unique-validator";
+import bcrypt from "bcrypt";
 
-interface IUsesr extends Document {
+interface IUser extends Document {
   firstName: string;
   lastName: string;
   nickName: string;
@@ -24,9 +24,9 @@ const UserSchema = new Schema({
     default: null,
     trim: true,
     unique: true,
-    required: 'Обязательное поле!',
-    minlength: [2, 'Слишком короткий ник!'],
-    maxlength: [50, 'Слишком длинный ник!']
+    required: "Обязательное поле!",
+    minlength: [2, "Слишком короткий ник!"],
+    maxlength: [50, "Слишком длинный ник!"]
   },
   password: {
     type: String,
@@ -34,43 +34,43 @@ const UserSchema = new Schema({
     trim: true,
     unique: true,
     sparse: true,
-    required: 'Обязательное поле!',
-    minlength: [10, 'Слишком короткий пароль!'],
-    maxlength: [256, 'Слишком длинный пароль!']
+    required: "Обязательное поле!",
+    minlength: [10, "Слишком короткий пароль!"],
+    maxlength: [256, "Слишком длинный пароль!"]
   },
   firstName: {
     type: String,
-    required: 'Обязательное поле!',
+    required: "Обязательное поле!",
     trim: true,
-    minlength: [2, 'Слишком короткое имя!'],
-    maxlength: [50, 'Слишком длинное имя!']
+    minlength: [2, "Слишком короткое имя!"],
+    maxlength: [50, "Слишком длинное имя!"]
   },
   lastName: {
     type: String,
-    required: 'Обязательное поле!',
+    required: "Обязательное поле!",
     trim: true,
-    minlength: [2, 'Слишком короткая фамилия!'],
-    maxlength: [50, 'Слишком длинная фамилия!']
+    minlength: [2, "Слишком короткая фамилия!"],
+    maxlength: [50, "Слишком длинная фамилия!"]
   },
   email: {
     type: String,
-    required: 'Обязательное поле!',
+    required: "Обязательное поле!",
     trim: true,
     unique: true,
     min: 3,
-    validate: [isEmail, 'Нужну ввести почту!'],
-    minlength: [2, 'Слишком короткая почта!'],
-    maxlength: [50, 'Слишком длинная почта!']
+    validate: [isEmail, "Нужну ввести почту!"],
+    minlength: [2, "Слишком короткая почта!"],
+    maxlength: [50, "Слишком длинная почта!"]
   },
   race: {
-    type: Boolean,
+    type: Boolean
   },
   type: {
-    type: String,
-  },
+    type: String
+  }
 });
 
-UserSchema.pre('save', async function(next) {
+UserSchema.pre("save", async function(next) {
   const user: any = this;
   const hash = await bcrypt.hash(user.password, 10);
   user.password = hash;
@@ -83,8 +83,10 @@ UserSchema.methods.isValidPassword = async function(password: string) {
   return compare;
 };
 
-UserSchema.plugin(beautifyUnique, { message: '{VALUE} уже существует!' });
+UserSchema.plugin(uniqueValidator, {
+  message: "{PATH}"
+});
 
-const User = mongoose.model<IUsesr>('User', UserSchema);
+const User = mongoose.model<IUser>("User", UserSchema);
 
 export default User;

@@ -1,43 +1,44 @@
-import { configure, observable, action, runInAction } from 'mobx';
-import axios from 'axios';
+import { configure, observable, action, runInAction, toJS } from "mobx";
+import axios from "axios";
 
-configure({ enforceActions: 'observed' });
+configure({ enforceActions: "observed" });
 
 export class UserStore {
-  @observable status: string = 'pending';
-  @observable erros: {} = {};
+  @observable status: string = "pending";
+  @observable response: {} = {};
 
   @action
   signUpUser = async (signValue: object) => {
-    await runInAction('progress', () => {
-      this.status = 'progress';
+    runInAction("progress", () => {
+      this.status = "progress";
     });
     try {
-      const response = await axios.post('/signup', signValue);
-      await runInAction('succes', () => {
-        this.status = 'succes';
-      });
-      await setTimeout(() => {
-        runInAction('succes post pending', () => {
-          this.status = 'pending';
-        });
-      }, 2500);
-      console.log(response, 'response');
-    } catch (error) {
-      runInAction(() => {
-        this.erros = error.response;
-      });
-      console.log(this.erros, 'error');
-
-      runInAction('press f', () => {
-        this.status = 'press f';
+      const response = await axios.post("/signup", signValue);
+      runInAction("succes", () => {
+        this.status = "succes";
+        this.response = response.data;
       });
       setTimeout(() => {
-        runInAction('press f post pending', () => {
-          this.status = 'pending';
+        runInAction("succes post pending", () => {
+          this.status = "pending";
         });
       }, 2500);
-      console.log(error, 'error');
+    } catch (error) {
+      runInAction(() => {
+        this.response = error.response.data;
+      });
+      console.log(toJS(this.response), "ошибка стора");
+
+      runInAction("press f", () => {
+        this.status = "pressF";
+      });
+      if (this.status === "succes") {
+        setTimeout(() => {
+          runInAction("press f post pending", () => {
+            this.status = "pending";
+          });
+        }, 2500);
+      }
     }
-  }
+  };
 }

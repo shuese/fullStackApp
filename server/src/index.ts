@@ -1,21 +1,21 @@
-import dotenv from 'dotenv';
-import expressPinoLogger from 'express-pino-logger';
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
+import dotenv from "dotenv";
+import expressPinoLogger from "express-pino-logger";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 // import passport from 'passport';
-import bodyParser from 'body-parser';
-import userRoute from './routes/user';
-import { logger } from './utils/logger';
-import './utils/auth';
+import bodyParser from "body-parser";
+import userRoute from "./routes/user";
+import { logger } from "./utils/logger";
+import "./utils/auth";
 
-const result = dotenv.config()
- 
+const result = dotenv.config();
+
 if (result.error) {
-  throw result.error
+  throw result.error;
 }
- 
-console.log(result.parsed, 'result.parsed')
+
+console.log(result.parsed, "result.parsed");
 
 const dbKey = process.env.DB_KEY;
 
@@ -27,22 +27,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(passport.initialize());
 
-mongoose.connect(dbKey, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
+mongoose
+  .connect(dbKey, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
   })
   .then(() => {
-    console.log('Законектился к бд');
+    console.log("Законектился к бд");
   })
   .catch(err => {
-    console.log('Что-то не так:', err);
+    console.log("Что-то не так:", err);
   });
 
-mongoose.set('debug', true);
+mongoose.set("debug", true);
 
 app.use(userRoute);
 
 app.listen(8080, () => {
-  console.log('Следим за 8080!');
+  console.log("Следим за 8080!");
 });

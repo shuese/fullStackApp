@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { Form, FastField } from 'formik';
+import styled from "@emotion/styled";
+import { Form, FastField } from "formik";
 
 export const Entry = styled(Form)`
   display: grid;
@@ -19,42 +19,42 @@ export const Input = styled(FastField)`
   font-size: 24px;
 `;
 
-export const FirstName = styled('div')`
+export const FirstName = styled("div")`
   grid-column: 1/3;
   grid-row: 1/2;
   display: flex;
   flex-direction: column;
 `;
 
-export const LastName = styled('div')`
+export const LastName = styled("div")`
   grid-column: 3/5;
   grid-row: 1/2;
   display: flex;
   flex-direction: column;
 `;
 
-export const Email = styled('div')`
+export const Email = styled("div")`
   grid-column: 1/3;
   grid-row: 2/3;
   display: flex;
   flex-direction: column;
 `;
 
-export const NickName = styled('div')`
+export const NickName = styled("div")`
   grid-column: 3/5;
   grid-row: 2/3;
   display: flex;
   flex-direction: column;
 `;
 
-export const TypeUser = styled('div')`
+export const TypeUser = styled("div")`
   grid-column: 1/2;
   grid-row: 3/4;
   display: flex;
   flex-direction: column;
 `;
 
-export const SwitchWrap = styled('div')`
+export const SwitchWrap = styled("div")`
   grid-column: 2/3;
   grid-row: 3/4;
   margin-left: 10px;
@@ -62,14 +62,14 @@ export const SwitchWrap = styled('div')`
   flex-direction: column;
 `;
 
-export const Password = styled('div')`
+export const Password = styled("div")`
   grid-column: 3/5;
   grid-row: 3/4;
   display: flex;
   flex-direction: column;
 `;
 
-export const SubmitWrap = styled('div')`
+export const SubmitWrap = styled("div")`
   grid-column: 4/5;
   grid-row: 4/5;
   display: flex;
