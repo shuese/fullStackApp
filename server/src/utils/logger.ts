@@ -1,7 +1,7 @@
 import pino from 'pino';
 
 export const logger = pino({
-    name: 'fullStackApp',
+    name: 'fsa',
     level: 'debug',
     prettyPrint: true
   });
