@@ -8,7 +8,6 @@ const setup = () => {
   deserializeUser(async (id: string, done) => {
     try {
       const user = await UserModel.findById(id);
-      console.log(user, "user in setup");
       return done(null, user);
     } catch (err) {
       return done(err, null);
