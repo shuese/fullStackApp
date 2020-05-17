@@ -15,7 +15,7 @@ import {
   TypeUser,
   SwitchWrap,
   Password,
-  SubmitWrap
+  SubmitWrap,
 } from "./SignUp.style";
 import Select from "../../components/Select";
 import Error from "../../components/ErrorControl";
@@ -29,7 +29,7 @@ interface IFormValues {
   email: string;
   password: string;
   type: string;
-  race: boolean;
+  learned: boolean;
 }
 
 const defaultValues: IFormValues = {
@@ -39,13 +39,13 @@ const defaultValues: IFormValues = {
   email: "",
   password: "",
   type: "",
-  race: false
+  learned: false,
 };
 
 const options = [
   { value: "developer", label: "Разработчик" },
   { value: "designer", label: "дизайнер" },
-  { value: "qa", label: "Тестировщик" }
+  { value: "qa", label: "Тестировщик" },
 ];
 
 const SignUpSchema = Yup.object().shape({
@@ -69,7 +69,7 @@ const SignUpSchema = Yup.object().shape({
   password: Yup.string()
     .min(10, "Слишком короткий пароль!")
     .max(50, "Слишком длинный пароль!")
-    .required("Обезательное поле!")
+    .required("Обезательное поле!"),
 });
 
 const SignUp = ({ userStore }: any) => {
@@ -103,18 +103,18 @@ const SignUp = ({ userStore }: any) => {
           firstName,
           lastName,
           password,
-          race,
+          learned,
           type,
-          email
+          email,
         } = errorsApi.errors;
         setErrors({
           nickName: nickName?.message,
           firstName: firstName?.message,
           lastName: lastName?.message,
           password: password?.message,
-          race: race?.message,
+          learned: learned?.message,
           type: type?.message,
-          email: email?.message
+          email: email?.message,
         });
       }
 
@@ -132,7 +132,7 @@ const SignUp = ({ userStore }: any) => {
       onSubmit={onSubmit}
       validationSchema={SignUpSchema}
     >
-      {props => (
+      {(props) => (
         <Entry noValidate>
           {/* {console.log(props, "props")} */}
           <FirstName>
@@ -167,11 +167,11 @@ const SignUp = ({ userStore }: any) => {
           <SwitchWrap>
             <Title>Узнали? Согласны?</Title>
             <Switch
-              name="race"
-              onChange={val => {
-                props.setFieldValue("race", val);
+              name="learned"
+              onChange={(val) => {
+                props.setFieldValue("learned", val);
               }}
-              checked={props.values.race}
+              checked={props.values.learned}
             />
           </SwitchWrap>
           <Password>

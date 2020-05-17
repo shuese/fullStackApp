@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import GlobalStyles from './GlobalStyles';
-import Layout from './Layout/Layout';
-import SignUp from '../pages/SignUp';
-import Main from '../pages/Main';
-import NotFound from '../pages/NotFound';
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import GlobalStyles from "./GlobalStyles";
+import Layout from "./Layout/Layout";
+import SignUp from "../pages/SignUp";
+import SignIn from "../pages/SignIn";
+import Main from "../pages/Main";
+import NotFound from "../pages/NotFound";
 
 interface IAppProps {
   children?: React.ReactNode;
@@ -21,9 +22,10 @@ const App: React.SFC<IAppProps> = (props: IAppProps) => {
         <Layout.Content>
           <Router>
             <Switch>
-              <Route exact path='/' component={Main} />
-              <Route path='/signup' component={SignUp} />
-              <Route path='*' component={NotFound} />
+              <Route exact path="/" component={Main} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
+              <Route path="*" component={NotFound} />
             </Switch>
           </Router>
         </Layout.Content>
@@ -35,7 +37,7 @@ const App: React.SFC<IAppProps> = (props: IAppProps) => {
 
 App.defaultProps = {
   children: null,
-  oneBlock: false
+  oneBlock: false,
 };
 
 export default App;
